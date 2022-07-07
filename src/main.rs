@@ -1,18 +1,18 @@
 use wasm_bindgen::JsCast;
-use yew::prelude::*;
 use web_sys::HtmlInputElement;
+use yew::prelude::*;
 
 enum Msg {
     UpdateUsername(String),
     UpdatePassword(String),
-    Submit
+    Submit,
 }
 
 #[derive(Default)]
 struct Model {
     result: String,
     username: String,
-    password: String
+    password: String,
 }
 
 impl Component for Model {
@@ -29,12 +29,12 @@ impl Component for Model {
                 // web_sys::console::log_1(&format!("Username: {}", e).into());
                 self.username = e;
                 true
-            },
-            Msg:: UpdatePassword(e) => {
+            }
+            Msg::UpdatePassword(e) => {
                 // web_sys::console::log_1(&format!("Password: {}", e).into());
                 self.password = e;
                 true
-            },
+            }
             Msg::Submit => {
                 self.result = format!("Username: {}\nPassword: {}", self.username, self.password);
                 true
@@ -47,10 +47,11 @@ impl Component for Model {
             ( $t:expr ) => {
                 ctx.link().batch_callback(|e: InputEvent| {
                     let target = e.target();
-                    let input = target.and_then(|target| target.dyn_into::<HtmlInputElement>().ok());
+                    let input =
+                        target.and_then(|target| target.dyn_into::<HtmlInputElement>().ok());
                     input.map(|input| $t(input.value()))
                 })
-            }
+            };
         }
 
         let username_change = callback!(Msg::UpdateUsername);
@@ -72,13 +73,13 @@ impl Component for Model {
                         {"Log in"}
                     </h2>
                     <span>
-                        <label for="username"> 
+                        <label for="username">
                         {"Username"}
                         <input oninput={username_change} id="username" name="username" type="text" class="text-input" placeholder="Username" aria-required="true"/>
                         </label>
                     </span>
                     <span>
-                        <label for="password"> 
+                        <label for="password">
                             {"Password"}
                             <input oninput={password_change} id="password" name="password" type="password" class="text-input" placeholder="Password" aria-required="true"/>
                         </label>

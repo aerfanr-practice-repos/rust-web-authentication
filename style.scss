@@ -15,8 +15,7 @@ form {
     border-radius: 1rem;
     border-style: solid;
     border-width: 1px;
-    border-color:rgb(197, 197, 197);
-    // background-color:rgb(241, 124, 241);
+    border-color: rgb(197, 197, 197);
 }
 
 span {
@@ -44,7 +43,7 @@ span {
     padding: 1rem;
 }
 
-span > label {
+span>label {
     width: 100%;
 }
 
@@ -56,19 +55,20 @@ input {
     width: 100%;
     border-radius: 2rem;
     border-style: solid;
-    border-color:rgb(189, 13, 189);
-    outline-color:rgb(189, 13, 189);
-    background-color:rgb(189, 13, 189);
+    border-color: rgb(189, 13, 189);
+    outline-color: rgb(189, 13, 189);
+    background-color: rgb(189, 13, 189);
     color: white;
     font-weight: bold;
     font-size: larger;
     padding: 1rem;
 }
 
-.submit:hover, .submit:focus {
-    background-color:rgb(156, 11, 156);
-    border-color:rgb(156, 11, 156);
-    outline-color:rgb(156, 11, 156);
+.submit:hover,
+.submit:focus {
+    background-color: rgb(156, 11, 156);
+    border-color: rgb(156, 11, 156);
+    outline-color: rgb(156, 11, 156);
     color: white;
 }
 
