@@ -61,21 +61,36 @@ impl Component for Model {
         });
 
         html! {
-            <div>
-                <form onsubmit={on_submit}>
+            <div class="root" role="main">
+                <header>
+                    <h1>
+                        {"Interesting website"}
+                    </h1>
+                </header>
+                <form onsubmit={on_submit} title="Login">
+                    <h2>
+                        {"Log in"}
+                    </h2>
                     <span>
-                        <label for="username"> {"Username:"} </label>
-                        <input oninput={username_change} id="username" type="text"/>
+                        <label for="username"> 
+                        {"Username"}
+                        <input oninput={username_change} id="username" name="username" type="text" class="text-input" placeholder="Username" aria-required="true"/>
+                        </label>
                     </span>
                     <span>
-                        <label for="password"> {"Password:"} </label>
-                        <input oninput={password_change} id="password" type="password"/>
+                        <label for="password"> 
+                            {"Password"}
+                            <input oninput={password_change} id="password" name="password" type="password" class="text-input" placeholder="Password" aria-required="true"/>
+                        </label>
                     </span>
                     <span>
-                        <input type="submit"/>
+                        <input type="submit" class="submit" value="Log in"/>
                     </span>
+                    <p class="result" role="alert"> {&self.result} </p>
                 </form>
-                <p> {&self.result} </p>
+                <footer>
+                    { "There will be some stuff in here." }
+                </footer>
             </div>
         }
     }
