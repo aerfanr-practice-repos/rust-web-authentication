@@ -6,6 +6,7 @@ enum Msg {
     UpdateUsername(String),
     UpdatePassword(String),
     Submit,
+    ShowPass
 }
 
 #[derive(Default)]
@@ -13,6 +14,7 @@ struct Model {
     result: String,
     username: String,
     password: String,
+    show_pass: bool,
 }
 
 impl Component for Model {
@@ -28,15 +30,20 @@ impl Component for Model {
             Msg::UpdateUsername(e) => {
                 // web_sys::console::log_1(&format!("Username: {}", e).into());
                 self.username = e;
-                true
+                false
             }
             Msg::UpdatePassword(e) => {
                 // web_sys::console::log_1(&format!("Password: {}", e).into());
                 self.password = e;
-                true
+                false
             }
             Msg::Submit => {
                 self.result = format!("Username: {}\nPassword: {}", self.username, self.password);
+                true
+            }
+            Msg::ShowPass => {
+                self.show_pass = !self.show_pass;
+                web_sys::console::log_1(&format!("Password shown: {:?}", self.show_pass).into());
                 true
             }
         }
@@ -60,6 +67,16 @@ impl Component for Model {
             e.prevent_default();
             Msg::Submit
         });
+        let on_show_pass = ctx.link().callback(|_| Msg::ShowPass);
+
+        let pass_type = match self.show_pass {
+            true => "text",
+            false => "password",
+        };
+        let pass_icon = match self.show_pass {
+            true => "icon icon-eye-blocked",
+            false => "icon icon-eye",
+        };
 
         html! {
             <div class="root" role="main">
@@ -73,16 +90,22 @@ impl Component for Model {
                         {"Log in"}
                     </h2>
                     <span>
-                        <label for="username">
-                        {"Username"}
-                        <input oninput={username_change} id="username" name="username" type="text" class="text-input" placeholder="Username" aria-required="true"/>
+                        <label class="sides" for="username">
+                            {"Username"}
                         </label>
+                        <input oninput={username_change} id="username" name="username" type="text" class="text-input" placeholder="Username" aria-required="true"/>
                     </span>
                     <span>
-                        <label for="password">
-                            {"Password"}
-                            <input oninput={password_change} id="password" name="password" type="password" class="text-input" placeholder="Password" aria-required="true"/>
-                        </label>
+                        <span class="sides">
+                            <label for="password">
+                                {"Password"}
+                            </label>
+                            <button type="button" onclick={on_show_pass} class="show-pass" tabindex="-1">
+                                <i class={pass_icon} aria-hidden="true"></i>
+                                {"Show"}
+                            </button>
+                        </span>
+                        <input oninput={password_change} id="password" name="password" type={ pass_type } class="text-input" placeholder="Password" aria-required="true"/>
                     </span>
                     <span>
                         <input type="submit" class="submit" value="Log in"/>
@@ -90,7 +113,7 @@ impl Component for Model {
                     <p class="result" role="alert"> {&self.result} </p>
                 </form>
                 <footer>
-                    { "There will be some stuff in here." }
+                    { "Icons from \"IcoMoon - Free (CC-BY)\"" }
                 </footer>
             </div>
         }

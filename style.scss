@@ -43,10 +43,6 @@ span {
     padding: 1rem;
 }
 
-span>label {
-    width: 100%;
-}
-
 input {
     padding: 0.5rem;
 }
@@ -90,8 +86,31 @@ footer {
     grid-column-end: 6;
     padding: 1rem;
     justify-content: center;
+    align-items: center;
+    font-size: smaller;
+    color: rgb(56, 56, 56);
 }
 
-h1 {
+h1, h2{
     margin: 1rem;
+}
+
+.sides {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.show-pass {
+    padding: 0.1rem;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    font-size: small;
+}
+
+.icon {
+    vertical-align: bottom;
+    margin: 0.1em;
 }
