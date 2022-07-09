@@ -11,10 +11,17 @@ enum Msg {
 
 #[derive(Default)]
 struct Model {
-    result: String,
     username: String,
     password: String,
     show_pass: bool,
+    errors: Errors,
+}
+
+#[derive(Default)]
+struct Errors {
+    username: String,
+    password: String,
+    form: String,
 }
 
 impl Component for Model {
@@ -38,7 +45,25 @@ impl Component for Model {
                 false
             }
             Msg::Submit => {
-                self.result = format!("Username: {}\nPassword: {}", self.username, self.password);
+                let mut pass = true;
+                self.errors.username = String::from(match self.username.is_empty() {
+                    true => {
+                        pass = false;
+                        "This field is required."
+                    }
+                    false => ""
+                });
+                self.errors.password = String::from(match self.password.is_empty() {
+                    true => {
+                        pass = false;
+                        "This field is required."
+                    }
+                    false => ""
+                });
+
+                if pass {
+                    self.errors.form = format!("Username: {}\nPassword: {}", self.username, self.password);
+                }
                 true
             }
             Msg::ShowPass => {
@@ -93,6 +118,7 @@ impl Component for Model {
                         <label class="sides" for="username">
                             {"Username"}
                         </label>
+                        <p class="error" role="alert"> { &self.errors.username } </p>
                         <input oninput={username_change} id="username" name="username" type="text" class="text-input" placeholder="Username" aria-required="true"/>
                     </span>
                     <span>
@@ -105,12 +131,13 @@ impl Component for Model {
                                 {"Show"}
                             </button>
                         </span>
+                        <p class="error" role="alert"> { &self.errors.password } </p>
                         <input oninput={password_change} id="password" name="password" type={ pass_type } class="text-input" placeholder="Password" aria-required="true"/>
                     </span>
                     <span>
                         <input type="submit" class="submit" value="Log in"/>
                     </span>
-                    <p class="result" role="alert"> {&self.result} </p>
+                    <p class="result error" role="alert"> {&self.errors.form} </p>
                 </form>
                 <footer>
                     { "Icons from \"IcoMoon - Free (CC-BY)\"" }
