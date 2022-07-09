@@ -147,6 +147,8 @@ impl Component for Model {
                 </form>
                 <footer>
                     { "Icons from \"IcoMoon - Free (CC-BY)\"" }
+                    <a class="github-button" href="https://github.com/aerfanr-practice-repos/rust-web-authentication" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="false" aria-label="Star aerfanr-practice-repos/rust-web-authentication on GitHub"> { "Star on Github" } </a>
+                    <a class="github-button" href="https://github.com/aerfanr" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Follow @aerfanr on GitHub"> { "Follow @aerfanr" } </a>
                 </footer>
             </div>
         }
