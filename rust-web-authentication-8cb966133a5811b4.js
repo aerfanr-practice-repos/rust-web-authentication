@@ -481,8 +481,8 @@ function getImports() {
     imports.wbg.__wbindgen_throw = function(arg0, arg1) {
         throw new Error(getStringFromWasm0(arg0, arg1));
     };
-    imports.wbg.__wbindgen_closure_wrapper136 = function(arg0, arg1, arg2) {
-        const ret = makeClosure(arg0, arg1, 52, __wbg_adapter_18);
+    imports.wbg.__wbindgen_closure_wrapper139 = function(arg0, arg1, arg2) {
+        const ret = makeClosure(arg0, arg1, 54, __wbg_adapter_18);
         return addHeapObject(ret);
     };
 
@@ -518,7 +518,7 @@ function initSync(bytes) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('rust-web-authentication-af2abdf10b2b6180_bg.wasm', import.meta.url);
+        input = new URL('rust-web-authentication-8cb966133a5811b4_bg.wasm', import.meta.url);
     }
     const imports = getImports();
 
