@@ -51,7 +51,13 @@ impl Component for Model {
                         pass = false;
                         "This field is required."
                     }
-                    false => ""
+                    false => match self.username.chars().all(char::is_alphanumeric) {
+                        false => {
+                            pass = false;
+                            "Username must be alphanumeric."
+                        }
+                        true => ""
+                    }
                 });
                 self.errors.password = String::from(match self.password.is_empty() {
                     true => {
