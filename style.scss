@@ -18,6 +18,15 @@ form {
     border-color: rgb(197, 197, 197);
 }
 
+@media (max-width: 480px) {
+    form {
+        border: none;
+    }
+    h1 {
+        text-align: center;
+    }
+}
+
 span {
     display: flex;
     flex-wrap: wrap;
